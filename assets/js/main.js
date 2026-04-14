@@ -8,38 +8,46 @@ async function loadComponents() {
   const headerTarget = document.getElementById("header");
   const footerTarget = document.getElementById("footer");
 
-  if (headerTarget) {
-    const headerResponse = await fetch("components/header/header.html");
-    headerTarget.innerHTML = await headerResponse.text();
-  }
+  try {
+    if (headerTarget) {
+      const headerResponse = await fetch("./components/header/header.html");
+      if (!headerResponse.ok) {
+        throw new Error(`Error cargando header: ${headerResponse.status}`);
+      }
+      headerTarget.innerHTML = await headerResponse.text();
+    }
 
-  if (footerTarget) {
-    const footerResponse = await fetch("components/footer/footer.html");
-    footerTarget.innerHTML = await footerResponse.text();
+    if (footerTarget) {
+      const footerResponse = await fetch("./components/footer/footer.html");
+      if (!footerResponse.ok) {
+        throw new Error(`Error cargando footer: ${footerResponse.status}`);
+      }
+      footerTarget.innerHTML = await footerResponse.text();
+    }
+  } catch (error) {
+    console.error("Error cargando componentes:", error);
   }
 }
 
 function initMobileMenu() {
-  setTimeout(() => {
-    const menuToggle = document.querySelector(".menu-toggle");
-    const mobileMenu = document.querySelector(".mobile-menu");
-    const userToggle = document.querySelector(".user-toggle");
-    const userDropdown = document.querySelector(".mobile-user-dropdown");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileMenu = document.querySelector(".mobile-menu");
+  const userToggle = document.querySelector(".user-toggle");
+  const userDropdown = document.querySelector(".mobile-user-dropdown");
 
-    if (menuToggle && mobileMenu) {
-      menuToggle.addEventListener("click", () => {
-        mobileMenu.classList.toggle("open");
-        if (userDropdown) userDropdown.classList.remove("open");
-      });
-    }
+  if (menuToggle && mobileMenu) {
+    menuToggle.addEventListener("click", () => {
+      mobileMenu.classList.toggle("open");
+      if (userDropdown) userDropdown.classList.remove("open");
+    });
+  }
 
-    if (userToggle && userDropdown) {
-      userToggle.addEventListener("click", () => {
-        userDropdown.classList.toggle("open");
-        if (mobileMenu) mobileMenu.classList.remove("open");
-      });
-    }
-  }, 100);
+  if (userToggle && userDropdown) {
+    userToggle.addEventListener("click", () => {
+      userDropdown.classList.toggle("open");
+      if (mobileMenu) mobileMenu.classList.remove("open");
+    });
+  }
 }
 
 function initHeroSlider() {
@@ -66,13 +74,11 @@ function initHeroSlider() {
   }
 
   function nextSlide() {
-    const next = (current + 1) % slides.length;
-    showSlide(next);
+    showSlide((current + 1) % slides.length);
   }
 
   function prevSlide() {
-    const prev = (current - 1 + slides.length) % slides.length;
-    showSlide(prev);
+    showSlide((current - 1 + slides.length) % slides.length);
   }
 
   function startAutoSlide() {

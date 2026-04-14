@@ -103,8 +103,8 @@ button {
 }
 
 .brand img {
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 72px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -124,7 +124,7 @@ button {
 }
 
 .brand-desktop strong {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: var(--navy);
   font-weight: 800;
   white-space: nowrap;
@@ -143,7 +143,7 @@ button {
 }
 
 .brand-mobile .brand-big {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: var(--navy);
   font-weight: 900;
   line-height: 1;
@@ -752,8 +752,8 @@ button {
   }
 
   .brand img {
-    width: 52px;
-    height: 52px;
+    width: 58px;
+    height: 58px;
   }
 
   .brand-desktop {
@@ -774,7 +774,7 @@ button {
   }
 
   .brand-mobile .brand-big {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 900;
     color: var(--navy);
     margin-top: 2px;
@@ -827,8 +827,8 @@ button {
   }
 
   .brand img {
-    width: 46px;
-    height: 46px;
+    width: 52px;
+    height: 52px;
   }
 
   .brand-mobile .brand-small {
@@ -836,7 +836,7 @@ button {
   }
 
   .brand-mobile .brand-big {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   .mobile-menu.open,

@@ -20,15 +20,29 @@
 
     <section class="section">
       <div class="container">
-        <div class="section-heading split">
+        <div class="section-heading split tienda-topbar">
           <div>
             <span class="eyebrow">Catálogo</span>
             <h2>Productos disponibles</h2>
           </div>
+
+          <button id="openCartBtn" class="cart-button" type="button">
+            🛒 Carrito
+            <span id="cartCount" class="cart-count">0</span>
+          </button>
         </div>
 
         <div class="product-grid">
-          <article class="product-card">
+          <article
+            class="product-card js-product-card"
+            data-id="camiseta-oficial"
+            data-name="Camiseta Oficial Celeste"
+            data-price="89.90"
+            data-image="assets/img/producto-camiseta.png"
+            data-tag="Oficial"
+            data-description="Diseño principal de la temporada con identidad celeste del club."
+            data-features="Tela deportiva ligera|Escudo frontal|Corte unisex|Ideal para partidos y eventos"
+          >
             <div class="product-image">
               <img src="assets/img/producto-camiseta.png" alt="Camiseta oficial" />
             </div>
@@ -40,7 +54,16 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article
+            class="product-card js-product-card"
+            data-id="camiseta-premium"
+            data-name="Camiseta Edición Premium"
+            data-price="109.90"
+            data-image="assets/img/producto-camiseta2.png"
+            data-tag="Premium"
+            data-description="Acabado elegante con look profesional y detalles premium."
+            data-features="Tela premium transpirable|Detalles bordados|Corte moderno|Edición especial"
+          >
             <div class="product-image">
               <img src="assets/img/producto-camiseta2.png" alt="Camiseta premium" />
             </div>
@@ -52,7 +75,16 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article
+            class="product-card js-product-card"
+            data-id="pelota-bichuelas"
+            data-name="Pelota Diseño Bichuelas"
+            data-price="69.90"
+            data-image="assets/img/producto-pelota.png"
+            data-tag="Balón"
+            data-description="Pelota oficial para entrenamiento, colección y uso recreativo."
+            data-features="Cubierta resistente|Diseño oficial del club|Uso recreativo y entrenamiento|Tamaño estándar"
+          >
             <div class="product-image">
               <img src="assets/img/producto-pelota.png" alt="Pelota oficial" />
             </div>
@@ -64,7 +96,16 @@
             </div>
           </article>
 
-          <article class="product-card">
+          <article
+            class="product-card js-product-card"
+            data-id="bufanda-oficial"
+            data-name="Bufanda Oficial"
+            data-price="39.90"
+            data-image="assets/img/producto-bufanda.png"
+            data-tag="Accesorio"
+            data-description="Bufanda oficial del club para hinchas y socios."
+            data-features="Tejido suave|Diseño celeste oficial|Ideal para eventos|Producto de colección"
+          >
             <div class="product-image">
               <img src="assets/img/producto-bufanda.png" alt="Bufanda oficial" />
             </div>
@@ -80,8 +121,162 @@
     </section>
   </main>
 
+  <!-- MODAL PRODUCTO -->
+  <div id="productModal" class="custom-modal" aria-hidden="true">
+    <div class="custom-modal__backdrop" data-close-modal></div>
+
+    <div class="custom-modal__dialog">
+      <button class="custom-modal__close" type="button" data-close-modal>&times;</button>
+
+      <div class="product-modal-content">
+        <div class="product-modal-image">
+          <img id="modalProductImage" src="" alt="" />
+        </div>
+
+        <div class="product-modal-info">
+          <span id="modalProductTag" class="product-tag"></span>
+          <h3 id="modalProductName"></h3>
+          <p id="modalProductDescription"></p>
+
+          <ul id="modalProductFeatures" class="product-features"></ul>
+
+          <div class="product-modal-price" id="modalProductPrice"></div>
+
+          <div class="quantity-box">
+            <label for="modalProductQty">Cantidad</label>
+            <div class="quantity-controls">
+              <button type="button" id="qtyMinus">-</button>
+              <input id="modalProductQty" type="number" min="1" value="1" />
+              <button type="button" id="qtyPlus">+</button>
+            </div>
+          </div>
+
+          <button id="addToCartFromModal" class="primary-button" type="button">
+            Agregar al carrito
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARRITO -->
+  <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+    <div class="cart-drawer__backdrop" id="cartBackdrop"></div>
+
+    <div class="cart-drawer__panel">
+      <div class="cart-header">
+        <h3>Tu carrito</h3>
+        <button id="closeCartBtn" type="button">&times;</button>
+      </div>
+
+      <div id="cartItems" class="cart-items"></div>
+
+      <div class="cart-summary">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <strong id="cartSubtotal">S/ 0.00</strong>
+        </div>
+        <button id="goCheckoutBtn" class="primary-button full" type="button">
+          Continuar compra
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT -->
+  <div id="checkoutModal" class="custom-modal" aria-hidden="true">
+    <div class="custom-modal__backdrop" data-close-checkout></div>
+
+    <div class="custom-modal__dialog checkout-dialog">
+      <button class="custom-modal__close" type="button" data-close-checkout>&times;</button>
+
+      <div class="checkout-content">
+        <h3>Finalizar compra</h3>
+
+        <form id="checkoutForm" class="checkout-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="customerName">Nombre completo</label>
+              <input id="customerName" name="customerName" type="text" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerEmail">Correo</label>
+              <input id="customerEmail" name="customerEmail" type="email" required />
+            </div>
+
+            <div class="form-group">
+              <label for="customerPhone">Teléfono</label>
+              <input id="customerPhone" name="customerPhone" type="tel" required />
+            </div>
+
+            <div class="form-group">
+              <label for="deliveryType">Tipo de entrega</label>
+              <select id="deliveryType" name="deliveryType" required>
+                <option value="envio">Envío</option>
+                <option value="recojo">Recojo en punto</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="shippingFields">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="department">Departamento</label>
+                <input id="department" name="department" type="text" />
+              </div>
+
+              <div class="form-group">
+                <label for="province">Provincia</label>
+                <input id="province" name="province" type="text" />
+              </div>
+
+              <div class="form-group">
+                <label for="district">Distrito</label>
+                <input id="district" name="district" type="text" />
+              </div>
+
+              <div class="form-group form-group-full">
+                <label for="address">Dirección</label>
+                <input id="address" name="address" type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div id="pickupFields" class="pickup-box" style="display: none;">
+            <p><strong>Recojo:</strong> coordinaremos el punto de entrega luego de la compra.</p>
+          </div>
+
+          <div class="checkout-resume">
+            <h4>Resumen</h4>
+            <div id="checkoutItems"></div>
+            <div class="cart-total-row">
+              <span>Total</span>
+              <strong id="checkoutTotal">S/ 0.00</strong>
+            </div>
+          </div>
+
+          <div class="payment-box">
+            <h4>Método de pago</h4>
+            <p>Botón preparado para integrar Mercado Pago. Yape lo conectas tú luego.</p>
+
+            <div class="payment-actions">
+              <button type="submit" class="primary-button">
+                Pagar con Mercado Pago
+              </button>
+              <button type="button" class="secondary-button" id="fakeYapeBtn">
+                Opción Yape
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div id="footer"></div>
 
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/shop.js"></script>
 </body>
 </html>

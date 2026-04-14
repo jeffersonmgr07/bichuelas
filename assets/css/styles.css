@@ -78,11 +78,6 @@ button {
   gap: 16px;
 }
 
-.topbar-inner p {
-  margin: 0;
-  opacity: 0.9;
-}
-
 .topbar-link {
   color: var(--gold);
   font-weight: 700;
@@ -111,6 +106,7 @@ button {
   width: 58px;
   height: 58px;
   object-fit: contain;
+  flex-shrink: 0;
 }
 
 .brand-text {
@@ -122,11 +118,24 @@ button {
 
 .brand-text strong {
   font-size: 1rem;
+  color: var(--navy);
 }
 
 .brand-text span {
   font-size: 0.95rem;
   color: var(--muted);
+}
+
+.brand-text.single-line {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text.single-line strong {
+  font-size: 1rem;
+  color: var(--navy);
+  font-weight: 800;
+  white-space: nowrap;
 }
 
 .desktop-nav {
@@ -695,22 +704,24 @@ button {
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
 @media (max-width: 768px) {
   .topbar {
-    min-height: 30px;
+    min-height: 28px;
   }
 
   .topbar-inner {
-    min-height: 30px;
+    min-height: 28px;
     padding: 0;
     justify-content: center;
     text-align: center;
   }
 
   .topbar-link {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     line-height: 1;
     color: var(--gold);
+    font-weight: 800;
   }
 
   .navbar {
@@ -718,33 +729,37 @@ button {
   }
 
   .nav-inner {
-    min-height: 70px;
+    min-height: 68px;
     gap: 12px;
   }
 
   .brand {
     gap: 10px;
+    flex: 1;
+    min-width: 0;
   }
 
   .brand img {
-    width: 46px;
-    height: 46px;
+    width: 44px;
+    height: 44px;
   }
 
   .brand-text {
-    display: flex;
-    line-height: 1.05;
+    display: flex !important;
   }
 
-  .brand-text strong {
-    font-size: 0.92rem;
-    color: var(--navy);
+  .brand-text.single-line {
+    display: flex !important;
+    align-items: center;
+    min-width: 0;
   }
 
-  .brand-text span {
-    font-size: 0.92rem;
-    color: var(--navy);
-    font-weight: 700;
+  .brand-text.single-line strong {
+    font-size: 0.95rem;
+    color: var(--navy) !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .hero-slider {
@@ -790,17 +805,16 @@ button {
 
 @media (max-width: 560px) {
   .nav-inner {
-    min-height: 68px;
+    min-height: 64px;
   }
 
   .brand img {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 
-  .brand-text strong,
-  .brand-text span {
-    font-size: 0.88rem;
+  .brand-text.single-line strong {
+    font-size: 0.8rem;
   }
 
   .mobile-menu.open,

@@ -755,7 +755,7 @@ button {
   }
 
   .brand-text.single-line strong {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     color: var(--navy) !important;
     white-space: nowrap;
     overflow: hidden;
@@ -814,7 +814,7 @@ button {
   }
 
   .brand-text.single-line strong {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
 
   .mobile-menu.open,

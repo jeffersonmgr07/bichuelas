@@ -740,8 +740,8 @@ button {
   }
 
   .brand img {
-    width: 44px;
-    height: 44px;
+    width: 56px;
+    height: 56px;
   }
 
   .brand-text {
@@ -755,7 +755,7 @@ button {
   }
 
   .brand-text.single-line strong {
-    font-size: 0.95rem;
+    font-size: 1.5rem;
     color: var(--navy) !important;
     white-space: nowrap;
     overflow: hidden;
@@ -809,12 +809,12 @@ button {
   }
 
   .brand img {
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
   }
 
   .brand-text.single-line strong {
-    font-size: 0.8rem;
+    font-size: 1.4rem;
   }
 
   .mobile-menu.open,
